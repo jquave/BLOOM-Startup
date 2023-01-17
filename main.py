@@ -2,7 +2,8 @@ from transformers import AutoTokenizer, BloomModel, BloomForCausalLM
 import torch
 
 tokenizer = AutoTokenizer.from_pretrained("bigscience/bloom")
-model = BloomForCausalLM.from_pretrained("bigscience/bloom").cuda()
+# model = BloomForCausalLM.from_pretrained("bigscience/bloom").cuda()
+model = AutoModelForCausalLM.from_pretrained("bigscience/bloom", low_cpu_mem_usage=True, torch_dtype=torch.bfloat16, device_map="auto")
 
 
 prompt = """
